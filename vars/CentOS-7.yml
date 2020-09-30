@@ -1,0 +1,11 @@
+role_hv_kvm_packages:
+  - centos-release-qemu-ev
+  - qemu-kvm-ev
+  - libvirt
+  - libvirt-python
+  - libguestfs-tools
+  - libvirt-daemon-driver-qemu
+  - virt-install
+role_hv_kvm_libvirtd_service: libvirtd
+role_hv_kvm_libvirtd_conf_path: /etc/libvirt/libvirtd.conf
+role_hv_kvm_qemu_conf_path: /etc/libvirt/qemu.conf

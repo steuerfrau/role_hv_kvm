@@ -1,0 +1,40 @@
+- name: Configure libvirtd.conf
+  template:
+    src: templates/libvirtd_conf-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.j2
+    dest: "{{ role_hv_kvm_libvirtd_conf_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - Restart libvirtd
+
+- name: Configure qemu.conf
+  template:
+    src: templates/qemu_conf-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.j2
+    dest: "{{ role_hv_kvm_qemu_conf_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - Restart libvirtd
+
+- name: /etc/sysconfig/libvirtd.conf
+  template:
+    src: templates/sysconfig_libvirtd-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.j2
+    dest: /etc/sysconfig/libvirtd
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - Restart libvirtd
+  when: ansible_distribution == "CentOS"
+
+- name: cloudstack-agent enabled
+  service:
+    name: cloudstack-agent
+    enabled: true
+
+- name: libvirtd enabled
+  service:
+    name: "{{ role_hv_kvm_libvirtd_service }}"
+    enabled: true

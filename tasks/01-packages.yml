@@ -1,0 +1,12 @@
+- name: Install kvm packages.
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    "{{ role_hv_kvm_packages }}"
+
+- name: Install CloudStack Agent - Todo move to submodule.
+  package:
+    name: cloudstack-agent
+    state: present
+

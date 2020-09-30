@@ -1,0 +1,7 @@
+---
+# handlers file for role_hv_kvm
+
+- name: Restart libvirtd
+  service:
+    name: "{{ role_hv_kvm_libvirtd_service }}"
+    state: restarted
