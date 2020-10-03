@@ -29,11 +29,6 @@
   - Restart libvirtd
   when: ansible_distribution == "CentOS"
 
-- name: cloudstack-agent enabled
-  service:
-    name: cloudstack-agent
-    enabled: true
-
 - name: libvirtd enabled
   service:
     name: "{{ role_hv_kvm_libvirtd_service }}"
